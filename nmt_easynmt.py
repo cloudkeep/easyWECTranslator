@@ -1,5 +1,19 @@
 from easynmt import EasyNMT
-model = EasyNMT('opus-mt')
+import sys
 
-# Tłumaczenie pojedynczego zdania na angielski
-print(model.translate('Słyszeć nie znaczy słuchać, bo słuch jest zmysłem, a słuchanie sztuką', target_lang='en'))
+def translate_text(text, target_lang, model_name='opus-mt'):
+    try:
+        model = EasyNMT(model_name)
+        return model.translate(text, target_lang=target_lang)
+    except Exception as e:
+        print(f"Wystąpił błąd: {e}")
+        return None
+
+if __name__ == "__main__":
+    text = sys.argv[1]
+    target_language = sys.argv[2]
+    translated_text = translate_text(text, target_language)
+    if translated_text:
+        print(translated_text)
+    else:
+        print("Nie udało się przetłumaczyć tekstu.")
