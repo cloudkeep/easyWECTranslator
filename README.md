@@ -1,19 +1,15 @@
 
 Python 3.9
 
-
 **PIP**:
 
 Aby zainstalować wszystkie potrzebne paczki z pip:
 
 pip install -r requirements.txt
 
-
 Eksport zależności do txt:
 
 pip freeze > requirements.txt
-
-
 
 **CONDA**:
 
@@ -22,7 +18,6 @@ Jeżeli chcemy skopiować środowisko to:
 
 conda env create --name easyWECTranslator --file=environment.yml
 
-
 - Aktualizacja:
 conda env update --file environment.yml --prune
 
@@ -30,9 +25,7 @@ conda env update --file environment.yml --prune
 conda env export > environment.yml
 (uwaga paczki pip na razie się nie synchronizują)
 
-
 **PAKIETY**:
-
 
 _openai-whisper_:
 
@@ -47,8 +40,6 @@ później w terminalu -> choco install ffmpeg
 
 - na macos tak -> brew install ffmpeg
 
-
-
 _easynmt_:
 
 pip install easynmt
@@ -57,8 +48,6 @@ pip install easynmt
 (to dla instalacji fasttext)
 
 - na ubuntu/debian nie potrzebne vsbuildtools
-
-
 
 _coquitts_:
 
