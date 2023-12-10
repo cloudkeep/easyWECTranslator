@@ -1,8 +1,15 @@
 import sys
+import tkinter as tk
+from tkinter import filedialog
 import asr_whisper
 import nmt_easynmt
 import tts_coqui
 
+def select_audio_file():
+    root = tk.Tk()
+    root.withdraw()  # Ukrywa główne okno tkinter
+    file_path = filedialog.askopenfilename()
+    return file_path
 
 def main():
     # Wybór między wprowadzeniem tekstu a przesłaniem pliku audio
@@ -11,8 +18,13 @@ def main():
     if choice == '1':
         text = input("Wpisz tekst: ")
     elif choice == '2':
-        file_path = input("Podaj ścieżkę do pliku audio: ")
-        text = asr_whisper.transcribe_audio(file_path)
+        print("Wybierz plik audio...")
+        file_path = select_audio_file()
+        if file_path:
+            text = asr_whisper.transcribe_audio(file_path)
+        else:
+            print("Nie wybrano pliku.")
+            return
     else:
         print("Nieprawidłowa opcja")
         return
@@ -35,7 +47,6 @@ def main():
 
     print("Przetłumaczony tekst:", translated_text)
     print("Wygenerowany plik mowy zapisany jako 'output.wav'")
-
 
 if __name__ == "__main__":
     main()
