@@ -5,6 +5,8 @@ Python 3.9
 
 Aby zainstalować wszystkie potrzebne paczki z pip:
 
+PyCharm wygodnie patrzy, że nie ma niektórych zależności z requirements.txt(nie zawsze dobrze to działa) i proponuje zainstalować, ale można też ręcznie:
+
 pip install -r requirements.txt
 
 Eksport zależności do txt:
