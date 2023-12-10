@@ -1,15 +1,17 @@
+from PyQt5.QtWidgets import QApplication, QFileDialog
 import sys
-import tkinter as tk
-from tkinter import filedialog
+
 import asr_whisper
 import nmt_easynmt
 import tts_coqui
 
+
+
 def select_audio_file():
-    root = tk.Tk()
-    root.withdraw()  # Ukrywa główne okno tkinter
-    file_path = filedialog.askopenfilename()
+    app = QApplication(sys.argv)
+    file_path, _ = QFileDialog.getOpenFileName()
     return file_path
+
 
 def main():
     # Wybór między wprowadzeniem tekstu a przesłaniem pliku audio
@@ -47,6 +49,7 @@ def main():
 
     print("Przetłumaczony tekst:", translated_text)
     print("Wygenerowany plik mowy zapisany jako 'output.wav'")
+
 
 if __name__ == "__main__":
     main()

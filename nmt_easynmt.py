@@ -1,6 +1,7 @@
 from easynmt import EasyNMT
 import sys
 
+
 def translate_text(text, target_lang, model_name='opus-mt'):
     try:
         model = EasyNMT(model_name)
@@ -8,6 +9,7 @@ def translate_text(text, target_lang, model_name='opus-mt'):
     except Exception as e:
         print(f"Wystąpił błąd: {e}")
         return None
+
 
 if __name__ == "__main__":
     text = sys.argv[1]
