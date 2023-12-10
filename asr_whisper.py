@@ -4,7 +4,7 @@ import sys
 
 def transcribe_audio(file_path):
     # Załaduj model WhisperAI
-    model = whisper.load_model("base")
+    model = whisper.load_model("tiny")
 
     # Przetwórz plik audio
     result = model.transcribe(file_path)
