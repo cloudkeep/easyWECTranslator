@@ -40,7 +40,7 @@ def main():
     # Wybór modelu TTS
     tts_model = {
         "pl": "tts_models/pl/mai_female/vits",
-        "en": "tts_models/en/ljspeech/vits",
+        "en": "tts_models/en/ljspeech/tacotron2-DDC",
         "de": "tts_models/de/thorsten/vits",
         "es": "tts_models/es/css10/vits",
     }
