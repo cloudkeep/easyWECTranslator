@@ -27,8 +27,8 @@ def main():
     tts_model = {
         "pl": "tts_models/pl/mai_female/vits",
         "en": "tts_models/en/ljspeech/tacotron2-DDC",
-        "de": "tts_models/de/thorsten/tacotron2-DCA",
-        "es": "tts_models/es/mai/tacotron2-DDC",
+        "de": "tts_models/de/thorsten/vits",
+        "es": "tts_models/es/css10/vits",
     }
     # Generowanie mowy
     tts_coqui.text_to_speech(translated_text, "output.wav", tts_model[target_language])
