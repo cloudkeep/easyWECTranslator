@@ -1,4 +1,5 @@
 from fastapi import FastAPI, UploadFile, File, Form
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 import asr_whisper
 import nmt_easynmt
@@ -6,6 +7,14 @@ import tts_coqui
 import os
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Dla celów rozwojowych, dozwolone są wszystkie źródła
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.post("/translate/")
 async def translate(file: UploadFile = File(None), text: str = Form(None), target_language: str = Form(...)):
@@ -29,13 +38,18 @@ async def translate(file: UploadFile = File(None), text: str = Form(None), targe
         "de": "tts_models/de/thorsten/vits",
         "es": "tts_models/es/css10/vits",
     }
-
-    # Generowanie mowy
     output_filename = "output.wav"
     tts_coqui.text_to_speech(translated_text, output_filename, tts_model[target_language])
 
-    # Zwracanie pliku i przetłumaczonego tekstu
-    return {
-        "translated_text": translated_text,
-        "file": FileResponse(output_filename)
-    }
+    # Zapisywanie przetłumaczonego tekstu do tymczasowego pliku
+    translated_file_path = "translated_text.txt"
+    with open(translated_file_path, "w") as text_file:
+        text_file.write(translated_text)
+
+    # Zwracanie ścieżki do pliku z przetłumaczonym tekstem
+    return {"translated_text": translated_text, "file_path": output_filename}
+
+
+@app.get("/download/{file_path}")
+async def download(file_path: str):
+    return FileResponse(file_path)
