@@ -28,6 +28,8 @@ async def translate(file: UploadFile = File(None), text: str = Form(None), targe
     if not text:
         return {"error": "Brak tekstu do przetłumaczenia"}
 
+    #Detekcja języka
+    detected_language = nmt_easynmt.detect_language(text)
     # Tłumaczenie tekstu
     translated_text = nmt_easynmt.translate_text(text, target_language)
 

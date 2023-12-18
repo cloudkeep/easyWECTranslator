@@ -19,6 +19,7 @@ def main():
 
     if choice == '1':
         text = input("Wpisz tekst: ")
+
     elif choice == '2':
         print("Wybierz plik audio...")
         file_path = select_audio_file()

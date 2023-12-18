@@ -5,7 +5,17 @@ import sys
 def translate_text(text, target_lang, model_name='opus-mt'):
     try:
         model = EasyNMT(model_name)
+        print("=> detected language:", model.language_detection(text), "\n")
         return model.translate(text, target_lang=target_lang)
+    except Exception as e:
+        print(f"Wystąpił błąd: {e}")
+        return None
+
+
+def detect_language(text, model_name='opus-mt'):
+    try:
+        model = EasyNMT(model_name)
+        return model.language_detection(text)
     except Exception as e:
         print(f"Wystąpił błąd: {e}")
         return None
