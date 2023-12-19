@@ -4,8 +4,6 @@ from fastapi.responses import FileResponse
 import asr_whisper
 import nmt_easynmt
 import tts_coqui
-import os
-import time
 
 app = FastAPI()
 
