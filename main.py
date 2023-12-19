@@ -46,11 +46,11 @@ def main():
 
     if language_direction in directions_list:
         print("OK")
+        available_pairs = [pair for pair in directions_list if pair.startswith(detected_language)]
+        print("Więcej dostępnych kierunków tłumaczenia:", available_pairs)
     else:
         print("Oczekiwane tłumaczenie nie jest dostępne")
         available_pairs = [pair for pair in directions_list if pair.startswith(detected_language)]
-
-        # Wyświetlanie wyniku
         print("Dostępne kierunki tłumaczenia:", available_pairs)
 
 
