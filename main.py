@@ -35,8 +35,29 @@ def main():
     # Wybór języka docelowego
     target_language = input("Wybierz język docelowy (pl, en, de, es): ")
 
+    # Wykryty język
+    detected_language = nmt_easynmt.detect_language(text)
+    print("Wykryty język:", detected_language)
+    # Kierunek tłumaczenia
+    language_direction = detected_language + "-" + target_language
+    print("Kierunek tłumaczenia:", language_direction)
+
+    directions_list = nmt_easynmt.directions_list()
+
+    if language_direction in directions_list:
+        print("OK")
+    else:
+        print("Oczekiwane tłumaczenie nie jest dostępne")
+        available_pairs = [pair for pair in directions_list if pair.startswith(detected_language)]
+
+        # Wyświetlanie wyniku
+        print("Dostępne kierunki tłumaczenia:", available_pairs)
+
+
+
     # Tłumaczenie tekstu
     translated_text = nmt_easynmt.translate_text(text, target_language)
+    print("Przetłumaczony tekst:", translated_text)
 
     # Wybór modelu TTS
     tts_model = {
@@ -48,7 +69,6 @@ def main():
     # Generowanie mowy
     tts_coqui.text_to_speech(translated_text, "output.wav", tts_model[target_language])
 
-    print("Przetłumaczony tekst:", translated_text)
     print("Wygenerowany plik mowy zapisany jako 'output.wav'")
 
 
