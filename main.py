@@ -4,7 +4,7 @@ import sys
 import asr_whisper
 import nmt_easynmt
 import tts_coqui
-
+import time
 
 
 def select_audio_file():
@@ -56,8 +56,10 @@ def main():
 
 
     # Tłumaczenie tekstu
+    start_time = time.time()
     translated_text = nmt_easynmt.translate_text(text, target_language)
     print("Przetłumaczony tekst:", translated_text)
+    print("Przetłumaczone w czasie {:.2f} s".format(time.time() - start_time))
 
     # Wybór modelu TTS
     tts_model = {
