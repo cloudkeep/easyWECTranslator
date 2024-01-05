@@ -25,6 +25,7 @@ def main():
         file_path = select_audio_file()
         if file_path:
             text = asr_whisper.transcribe_audio(file_path)
+            detected_language_whisper = asr_whisper.whisper_detect(file_path)
         else:
             print("Nie wybrano pliku.")
             return
@@ -33,7 +34,7 @@ def main():
         return
 
     # Wybór języka docelowego
-    target_language = input("Wybierz język docelowy (pl, en, de, es): ")
+    target_language = input("Wybierz język docelowy (pl, en, de, es, it, uk, fr, zh): ")
 
     # Wykryty język
     detected_language = nmt_easynmt.detect_language(text)
@@ -53,8 +54,6 @@ def main():
         available_pairs = [pair for pair in directions_list if pair.startswith(detected_language)]
         print("Dostępne kierunki tłumaczenia:", available_pairs)
 
-
-
     # Tłumaczenie tekstu
     start_time = time.time()
     translated_text = nmt_easynmt.translate_text(text, target_language)
@@ -67,6 +66,11 @@ def main():
         "en": "tts_models/en/ljspeech/tacotron2-DDC",
         "de": "tts_models/de/thorsten/vits",
         "es": "tts_models/es/css10/vits",
+        "it": "tts_models/it/mai_female/vits",
+        "fr": "tts_models/fr/mai/tacotron2-DDC",
+        "zh": "tts_models/zh-CN/baker/tacotron2-DDC-GST",
+        "uk": "tts_models/multilingual/multi-dataset/xtts_v2"
+
     }
     # Generowanie mowy
     tts_coqui.text_to_speech(translated_text, "output.wav", tts_model[target_language])
