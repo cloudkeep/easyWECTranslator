@@ -42,7 +42,7 @@ async def translate(file: UploadFile = File(None), text: str = Form(None), targe
         # Detekcja języka i tłumaczenie tekstu
         detected_language = nmt_easynmt.detect_language(text)
 
-        if not source_language:
+        if source_language == "auto":
             translated_text = nmt_easynmt.translate_text(detected_language, text, target_language)
         else:
             translated_text = nmt_easynmt.translate_text(source_language, text, target_language)
