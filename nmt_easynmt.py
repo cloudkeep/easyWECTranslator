@@ -2,10 +2,10 @@ from easynmt import EasyNMT
 import sys
 
 
-def translate_text(text, target_lang, model_name='opus-mt'):
+def translate_text(source_lang, text, target_lang, model_name='opus-mt'):
     try:
         model = EasyNMT(model_name)
-        return model.translate(text, target_lang=target_lang)
+        return model.translate(text, source_lang = source_lang,target_lang=target_lang)
     except Exception as e:
         print(f"Wystąpił błąd: {e}")
         return None

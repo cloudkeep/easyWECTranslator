@@ -20,7 +20,7 @@ app.add_middleware(
 is_busy = False
 
 @app.post("/translate/")
-async def translate(file: UploadFile = File(None), text: str = Form(None), target_language: str = Form(...)):
+async def translate(file: UploadFile = File(None), text: str = Form(None), target_language: str = Form(...), source_language: str = Form(...)):
     global is_busy
 
     # Sprawdzanie, czy serwer jest zajęty
@@ -41,7 +41,14 @@ async def translate(file: UploadFile = File(None), text: str = Form(None), targe
 
         # Detekcja języka i tłumaczenie tekstu
         detected_language = nmt_easynmt.detect_language(text)
-        translated_text = nmt_easynmt.translate_text(text, target_language)
+
+        if not source_language:
+            translated_text = nmt_easynmt.translate_text(detected_language, text, target_language)
+        else:
+            translated_text = nmt_easynmt.translate_text(source_language, text, target_language)
+
+
+
 
         # Wybór modelu TTS
         tts_model = {
@@ -49,6 +56,10 @@ async def translate(file: UploadFile = File(None), text: str = Form(None), targe
             "en": "tts_models/en/ljspeech/tacotron2-DDC",
             "de": "tts_models/de/thorsten/vits",
             "es": "tts_models/es/css10/vits",
+            "it": "tts_models/it/mai_female/vits",
+            "fr": "tts_models/fr/mai/tacotron2-DDC",
+            "uk": "tts_models/multilingual/multi-dataset/xtts_v2"
+
         }
         output_filename = "output.wav"
         tts_coqui.text_to_speech(translated_text, output_filename, tts_model[target_language])
