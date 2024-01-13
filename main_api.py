@@ -66,6 +66,7 @@ async def translate(file: UploadFile = File(None), text: str = Form(None), targe
 
         # Zwracanie wyników
         return {
+            "detected_text": text,
             "translated_text": translated_text,
             "detected_language": detected_language,
             "language_pair": detected_language + "-" + target_language,
