@@ -3,13 +3,13 @@ import sys
 
 
 def transcribe_audio(file_path):
-    model = whisper.load_model("tiny")
+    model = whisper.load_model("base")
     result = model.transcribe(file_path)
     return result["text"]
 
 
 def whisper_detect(file_path):
-    model = whisper.load_model("tiny")
+    model = whisper.load_model("base")
     audio = whisper.load_audio(file_path)
     audio = whisper.pad_or_trim(audio)
     mel = whisper.log_mel_spectrogram(audio).to(model.device)

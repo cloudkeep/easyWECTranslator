@@ -56,7 +56,7 @@ def main():
 
     # Tłumaczenie tekstu
     start_time = time.time()
-    translated_text = nmt_easynmt.translate_text(text, target_language)
+    translated_text = nmt_easynmt.translate_text(detected_language, text, target_language)
     print("Przetłumaczony tekst:", translated_text)
     print("Przetłumaczone w czasie {:.2f} s".format(time.time() - start_time))
 
@@ -67,8 +67,8 @@ def main():
         "de": "tts_models/de/thorsten/vits",
         "es": "tts_models/es/css10/vits",
         "it": "tts_models/it/mai_female/vits",
-        "fr": "tts_models/fr/mai/tacotron2-DDC",
-        "uk": "tts_models/multilingual/multi-dataset/xtts_v2"
+        "fr": "tts_models/fr/css10/vits",
+        "uk": "tts_models/uk/mai/vits"
 
     }
     # Generowanie mowy
