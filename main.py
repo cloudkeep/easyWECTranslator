@@ -34,7 +34,7 @@ def main():
         return
 
     # Wybór języka docelowego
-    target_language = input("Wybierz język docelowy (pl, en, de, es, it, uk, fr, zh): ")
+    target_language = input("Wybierz język docelowy (pl, en, de, es, it, uk, fr): ")
 
     # Wykryty język
     detected_language = nmt_easynmt.detect_language(text)
@@ -68,7 +68,6 @@ def main():
         "es": "tts_models/es/css10/vits",
         "it": "tts_models/it/mai_female/vits",
         "fr": "tts_models/fr/mai/tacotron2-DDC",
-        "zh": "tts_models/zh-CN/baker/tacotron2-DDC-GST",
         "uk": "tts_models/multilingual/multi-dataset/xtts_v2"
 
     }
