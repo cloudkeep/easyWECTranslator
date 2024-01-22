@@ -16,7 +16,7 @@ def select_audio_file():
 def main():
     # Wybór między wprowadzeniem tekstu a przesłaniem pliku audio
     choice = input("Wybierz opcję: [1] Wpisz tekst, [2] Prześlij plik audio: ")
-
+    file_path = ""
     if choice == '1':
         text = input("Wpisz tekst: ")
 
@@ -34,10 +34,12 @@ def main():
         return
 
     # Wybór języka docelowego
+    source_language = input("Wybierz język źródłowy (pl, en, de, es, it, uk, fr): ")
     target_language = input("Wybierz język docelowy (pl, en, de, es, it, uk, fr): ")
 
     # Wykryty język
     detected_language = nmt_easynmt.detect_language(text)
+    detected_language = source_language
     print("Wykryty język:", detected_language)
     # Kierunek tłumaczenia
     language_direction = detected_language + "-" + target_language
@@ -71,9 +73,15 @@ def main():
         "uk": "tts_models/uk/mai/vits"
 
     }
-    # Generowanie mowy
-    tts_coqui.text_to_speech(translated_text, "output.wav", tts_model[target_language])
+    clone = input("Wybierz opcję: [1] klonuj, [2] nie klonuj: ")
 
+    if clone == '1':
+        tts_coqui.text_to_speech(translated_text, "output1.wav", tts_model[target_language], file_path, use_vc=True)
+
+    elif clone == '2':
+        tts_coqui.text_to_speech(translated_text, "output1.wav", tts_model[target_language],file_path)
+
+        # Generowanie mowy
     print("Wygenerowany plik mowy zapisany jako 'output.wav'")
 
 
